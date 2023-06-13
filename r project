@@ -38,3 +38,25 @@ cerveja[is.na(cerveja)] <- 0
 cerveja <- filter(cerveja, porcentagem_alcoolica > 0)
 
 
+# Descreasing the numbers of lines
+
+cerveja <- cerveja[-(100000:508590),]
+        
+
+# Plotting a scatter graphic 
+x <- cerveja$porcentagem_alcoolica
+y <- cerveja$nota_total
+plot(x,y)
+
+# Plotting a histogram graph
+hist(cerveja$nota_total)
+
+
+# Getting the best avaliated beers
+
+cervejas_melhor_avaliadas <- filter(cerveja, nota_total >= 4)
+
+# Plotting a boxplot of the highest avaliated beers
+
+boxplot(porcentagem_alcoolica~nota_total,data = cervejas_melhor_avaliadas)
+
