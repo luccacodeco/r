@@ -23,15 +23,20 @@ cerveja <- cerveja[,-c(2,3,10,12,13)]
 
 # Creating a new column wich will receive the total grades
 
+
 cerveja <- mutate(cerveja, notal_total = (nota_aparencia + nota_cor +
                                             nota_geral + nota_sabor +
                                             nota_aroma)/5)
+                                            
 # Checking how many NA in the DataFrame
+
 sum(is.na(cerveja))
+
 
 # Putting 0 in the NA spaces
 
 cerveja[is.na(cerveja)] <- 0
+
 
 # Getting only beer above 0% alcoholic percentage
 
@@ -48,7 +53,9 @@ x <- cerveja$porcentagem_alcoolica
 y <- cerveja$nota_total
 plot(x,y)
 
+
 # Plotting a histogram graph
+
 hist(cerveja$nota_total)
 
 
@@ -56,7 +63,66 @@ hist(cerveja$nota_total)
 
 cervejas_melhor_avaliadas <- filter(cerveja, nota_total >= 4)
 
+
 # Plotting a boxplot of the highest avaliated beers
 
 boxplot(porcentagem_alcoolica~nota_total,data = cervejas_melhor_avaliadas)
+
+
+# Getting the worst avaliated beers 
+
+cervejas_pior_avaliadas <- filter(cerveja, nota_total <= 3)
+
+
+# Plotting a boxplot of the worst avaliated beers 
+
+boxplot(porcentagem_alcoolica~nota_total, data = cervejas_pior_avaliadas)
+
+
+# Plotting a gg graph relating grades and alcohol percentage
+
+ggplot(data = cerveja) +geom_smooth(mapping = aes(x = nota_total, y = porcentagem_alcoolica, linetype = 'drv'))
+
+
+# Getting only beer avaliated with 5 points.
+
+cervejas_nota_max = filter(cerveja, nota_total == 5)
+
+
+# Counting the beers that was most voted  with 5 points
+
+count(cervejas_nota_max,nome_cerveja,sort = TRUE)
+
+# Getting only beer avaliated with 1 point.
+
+cervejas_nota_min = filter(cerveja, nota_total <= 1)
+
+
+# Counting the beers that was most voted with 1 point
+
+count(cervejas_nota_min, nome_cerveja, sort = TRUE)
+
+
+# Plotting a histogram with the alcohol percentage of the best avaliated beers
+
+hist(cervejas_nota_max$porcentagem_alcoolica)
+
+
+# Plotting a histogram with the alcohol percentage of the worst avaliated beers
+
+hist(cervejas_nota_min$porcentagem_alcoolica)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
