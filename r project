@@ -24,7 +24,7 @@ cerveja <- cerveja[,-c(2,3,10,12,13)]
 # Creating a new column wich will receive the total grades
 
 
-cerveja <- mutate(cerveja, notal_total = (nota_aparencia + nota_cor +
+cerveja <- mutate(cerveja, nota_total = (nota_aparencia + nota_cor +
                                             nota_geral + nota_sabor +
                                             nota_aroma)/5)
                                             
